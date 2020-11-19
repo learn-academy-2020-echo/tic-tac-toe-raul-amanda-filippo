@@ -15,6 +15,7 @@ class App extends Component {
 	// handleGamePlay method
 	// take in the index as an argument and passed from the square component
 
+
 	handleGamePlay = (index) => {
 		const { squares, currentPlayer, winner } = this.state;
 		// check if the clicked square = null (empty) and the winner is null
@@ -25,29 +26,52 @@ class App extends Component {
 				currentPlayer: currentPlayer === "x" ? "o" : "x",
 			});
 		}
+		console.log(squares)
 	};
 
 	// prevent already clicked box to get clicked again
 
+	winning = () => {
+		const {squares, currentPlayer } = this.state
+
+	
 	// Determine the winning conditions and double check what's in the board right now
 	//Winning conditions:
-	// Rows:
-	// index 0,1,2
-	// index 3,4,5
-	// index 6,7,8
-	// Columns:
-	// index 0,3,6
-	// index 1,4,7
-	// index 2,5,8
-	// Diagonally:
-	// 0,4,8
-	// 2,4,6
+	let winningCombos = [
+		[3,4,5],
+		[6,7,8],
+		[0,3,6],
+		[1,4,7],
+		[2,5,8],
+		[0,4,8],
+		[2,4,6],
+		[0,1,2]
+		]	
+console.log(winningCombos)
+
 
 	// check if any of the winning conditions have been met
+	// conditional that compares winningCombos to [squares] index
+	 winningCombos.map(value => {
+		 console.log(value)
+	 })
+
 	// if game won, you can't continue to play the game
 	// if no more squares available, show a notice that the game has ended
+	}
+
+	// console.log(this.winning)
 
 	//  restart game method with button
+	restartGame = () => {
+		// set state back to original state
+		this.setState({ 
+			squares: Array(9).fill(null),
+			currentPlayer: "x",
+			winner: null,
+			})
+		}
+
 
 	render() {
 		const { squares } = this.state;
@@ -68,6 +92,7 @@ class App extends Component {
 					})}
 				</div>
 				{/* button : restart game, uses restart game method */}
+				<button onClick ={ this.restartGame} > Restart Game </button>
 			</React.Fragment>
 		);
 	}
